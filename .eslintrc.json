@@ -1,0 +1,45 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true,
+    "jest/globals": true
+  },
+  "extends": [
+    "plugin:import/typescript",
+    "plugin:@typescript-eslint/recommended",
+    "prettier",
+    "plugin:jest/recommended"
+  ],
+  "root": true,
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "project": "../tsconfig.json",
+    "tsconfigRootDir": "src",
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "plugins": [
+    "prettier",
+    "@typescript-eslint",
+    "import",
+    "eslint-plugin-react"
+  ],
+  "rules": {
+    "prettier/prettier": "warn",
+    "jest/no-disabled-tests": "warn",
+    "jest/no-focused-tests": "warn",
+    "jest/no-identical-title": "error",
+    "jest/prefer-to-have-length": "warn",
+    "jest/valid-expect": "error",
+    "@typescript-eslint/no-explicit-any": "off",
+    "eslint-comments/no-unlimited-disable": "off"
+  },
+  "settings": {
+    "import/resolver": {
+      "typescript": {},
+      "babel-plugin-root-import": { "rootPathSuffix": "src" }
+    }
+  }
+}
