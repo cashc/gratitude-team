@@ -7,10 +7,10 @@
     "build": "react-scripts build",
     "prettier": "prettier --check \"src/**/*.ts{,x}\" --write",
     "typecheck": "node_modules/.bin/tsc --noEmit --skipLibCheck",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "lint": "eslint -c ./.eslintrc.json",
     "jest": "react-scripts test",
     "test": "yarn run typecheck && yarn run lint && yarn run jest",
-    "deploy": "yarn run test && yarn run build && gh-pages -d build"
+    "deploy": "yarn run lint && yarn run typecheck && yarn run build && gh-pages -d build"
   },
   "dependencies": {
     "react": "^18.2.0",
