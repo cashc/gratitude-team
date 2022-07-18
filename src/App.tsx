@@ -1,15 +1,15 @@
 import React from 'react';
-import styled, { ThemeProvider } from 'styled-components';
+import styled, { ThemeProvider } from './styled';
 import theme from './theme';
 
 const Main = styled.div`
   display: flex;
   width: 100%;
-  height: 100%;
+  height: 100vh;
+  overflow: hidden;
   flex-direction: column;
   margin: auto;
-  overflow: hidden;
-  max-width: 800px;
+  background-color: ${(props) => props.theme.background};
 `;
 
 const Header = styled.div`
@@ -17,6 +17,7 @@ const Header = styled.div`
   flex-direction: row;
   justify-content: center;
 
+  background-color: ${(props) => props.theme.white};
   padding: 5px;
   box-shadow: ${(props) => props.theme.shadow};
 
@@ -30,6 +31,7 @@ const LogoEl = styled.div`
 const Logo = () => <LogoEl>Gratitude Team</LogoEl>;
 
 const Body = styled.div`
+  background-color: ${(props) => props.theme.background};
   margin: 10px;
 `;
 

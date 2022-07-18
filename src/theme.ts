@@ -7,6 +7,7 @@ const theme = {
   gray: '#EEF5FF',
   lightGray: '#F9FBFF',
   border: '#F9FBFF',
+  background: '#FAF6F4',
   text: '#172A56',
   textlight: '#47779F',
   white: '#fff',
@@ -18,6 +19,9 @@ const theme = {
     active: '#172A56',
     inactive: '#47779F',
   },
-  shadow: '2px 2px 20px rgba(0, 0, 0, 0.15)',
+  shadow: '1px 1px 12px rgba(0, 0, 0, 0.15)',
 };
+
+export type DefaultTheme = typeof theme;
+
 export default theme;
