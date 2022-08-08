@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build  && echo 'gratitudeteam.org' >> ./build/CNAME",
     "prettier": "prettier --check \"src/**/*.ts{,x}\" --write",
     "typecheck": "node_modules/.bin/tsc --noEmit --skipLibCheck",
     "lint": "eslint -c ./.eslintrc.json",
@@ -14,7 +14,9 @@
   },
   "dependencies": {
     "react": "^18.2.0",
+    "react-circular-input": "^0.2.4",
     "react-dom": "^18.2.0",
+    "react-router-dom": "6",
     "styled-components": "^5.3.5"
   },
   "devDependencies": {
