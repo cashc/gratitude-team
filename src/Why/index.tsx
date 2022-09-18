@@ -10,6 +10,13 @@ export const Why = () => {
   return (
     <Body>
       <p>
+        Hello! My name is Cash. I built this website to connect with others and
+        to share practices that have been hugely beneficial to my life and
+        well-being. Meditation, breathwork, and journaling to name a few. By
+        sharing these practices, I grow in them myself and find great pleasure
+        in spreading their gifts to others.
+      </p>
+      <p>
         We all share in the same human experience where nothing lasts and
         everything is constantly changing. Where we want to hold on to what we
         love for as long as we can but always lose it in the end. In a word, we
@@ -27,11 +34,11 @@ export const Why = () => {
         beautiful lives we’re each living.
       </p>
       <p>
-        This website is built and maintained by Cash Compton, who is currently
-        the only guaranteed member of every Gratitude Team video call. To learn
-        more, sign up for a call and spend some time with Cash (and possibly 1-3
-        others) today! No experience is necessary, just an open mind, heart, and
-        willingness to connect.
+        This website is built and maintained by myself, Cash Compton. I am
+        currently the only guaranteed member of every Gratitude Team video call.
+        To learn more, sign up for a call and spend some time with me (and
+        possibly 1-3 others). No experience is necessary, just an open mind,
+        heart, and willingness to connect. I hope to spend time with you soon!
       </p>
     </Body>
   );

@@ -1,15 +1,20 @@
 import React, { useState } from 'react';
 import styled from '../styled';
-import { H3, Text, TextSmall } from '../shared-ui';
+import { H3, Text, TextSmall, RowOrColumn, TextLarge } from '../shared-ui';
 
 const Body = styled(Text)`
   margin: 10px auto;
   max-width: 720px;
-  text-align: center;
+`;
+
+const IntentionsContainer = styled(RowOrColumn)`
+  width: 100%;
+  max-width: 520px;
+  height: 140px;
 `;
 
 const Intention = styled(Text)`
-  margin-bottom: 10px;
+  margin: 5px;
   cursor: pointer;
 `;
 const IntentionAbove = styled(Intention)`
@@ -30,7 +35,11 @@ const IntentionBelow = styled(Intention)`
 const getRandomIndex = (length: number): number =>
   Math.floor(Math.random() * length);
 
+const symbols = ['🍌', '🦸🏼‍♀️', '🐶', '🦀', '🦫', '🌞', '🧘🏼‍♂️', '🐼'];
+const symbol = symbols[getRandomIndex(symbols.length)];
+
 const intentions = [
+  `Sharing in the struggle to be present, grateful, and full of love ${symbol}% of the time.`,
   'Sharing space with fellow humans struggling for gratitude',
   'Love',
   'Contemplating nothingness with friends',
@@ -43,34 +52,33 @@ const intentions = [
   'Returning your attention to what’s most important to you',
   'Struggling, failing, and laughing at our foolishness',
 ];
-const intentionIndexStart = getRandomIndex(intentions.length);
 
-const symbols = ['🍌', '🦸🏼‍♀️', '🐶', '🦀', '🦫', '🌞', '🧘🏼‍♂️', '🐼'];
-const symbolIndexStart = getRandomIndex(symbols.length);
+const startIndex = getRandomIndex(intentions.length);
 
 export const Home = () => {
-  const [index, setIndex] = useState(0);
+  const [index, setIndex] = useState(startIndex);
 
-  const symbol = symbols[(symbolIndexStart + index) % symbols.length];
-  const intention =
-    intentions[(intentionIndexStart + index) % intentions.length];
-  const intentionAbove =
-    intentions[(intentionIndexStart + index - 1) % intentions.length];
-  const intentionBelow =
-    intentions[(intentionIndexStart + index + 1) % intentions.length];
+  const intentionAbove = intentions[index % intentions.length];
+  const intention = intentions[(index + 1) % intentions.length];
+  const intentionBelow = intentions[(index + 2) % intentions.length];
 
   const decrementIndex = () => setIndex(index - 1);
   const incrementIndex = () => setIndex(index + 1);
 
   return (
     <Body>
-      <p>
-        Sharing in the struggle to be present, grateful, and full of love{' '}
-        {symbol}% of the time.
-      </p>
-      <IntentionAbove onClick={decrementIndex}>{intentionAbove}</IntentionAbove>
-      <Intention onClick={incrementIndex}>{intention}</Intention>
-      <IntentionBelow onClick={incrementIndex}>{intentionBelow}</IntentionBelow>
+      <IntentionsContainer>
+        <TextLarge style={{ fontStyle: 'italic' }}>Intention:</TextLarge>
+        <div>
+          <IntentionAbove onClick={decrementIndex}>
+            {intentionAbove}
+          </IntentionAbove>
+          <Intention onClick={incrementIndex}>{intention}</Intention>
+          <IntentionBelow onClick={incrementIndex}>
+            {intentionBelow}
+          </IntentionBelow>
+        </div>
+      </IntentionsContainer>
       <H3 style={{ marginTop: 50 }}>Choose a time:</H3>
       <TextSmall>Coming soon...</TextSmall>
     </Body>

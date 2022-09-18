@@ -4,8 +4,14 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import theme from './theme';
 import { Home } from './Home';
 import { Why } from './Why';
-import { routes } from './routes';
 import { Link } from './shared-ui';
+
+export const ROUTES = {
+  home: '/',
+  create_account: '/create-account',
+  login: '/login',
+  why: '/why',
+};
 
 const Main = styled.div`
   display: flex;
@@ -36,7 +42,7 @@ const LogoEl = styled(Link)`
   color: ${({ theme }) => theme.text};
   text-decoration: none;
 `;
-const Logo = () => <LogoEl to={routes.home}>Gratitude Team</LogoEl>;
+const Logo = () => <LogoEl to={ROUTES.home}>Gratitude Team</LogoEl>;
 
 function App() {
   return (
@@ -45,11 +51,11 @@ function App() {
         <Main>
           <Header>
             <Logo />
-            <Link to={routes.why}>About</Link>
+            <Link to={ROUTES.why}>About</Link>
           </Header>
           <Routes>
-            <Route path={routes.home} element={<Home />} />
-            <Route path={routes.why} element={<Why />} />
+            <Route path={ROUTES.home} element={<Home />} />
+            <Route path={ROUTES.why} element={<Why />} />
           </Routes>
         </Main>
       </BrowserRouter>
