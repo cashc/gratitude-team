@@ -24,9 +24,9 @@ export interface Event {
   duration_mins: number;
   created_by_id: number;
   facilitated_by_id: number;
-  invited_ids: number[];
+  invited_ids?: number[];
   hidden: boolean;
-  access_ids: number[];
+  access_ids?: number[];
 }
 export interface EventLD extends Event {
   tags?: Tag[];

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { supabase } from '../db';
 import styled from '../styled';
 import { TagButton } from '../Tags';
 import { TagLD, EventLD } from '../types';
@@ -20,6 +21,7 @@ export const Home: React.FC = () => {
 
   useEffect(() => {
     getData();
+    console.log(supabase);
   }, []);
 
   async function getData() {
@@ -36,10 +38,19 @@ export const Home: React.FC = () => {
       {
         name: 'Morning Silent',
         id: 0,
-        // startTime: 'Sat, 24 Sep 2022 04:11:15 GMT',
-        startTime: 1663992934076,
+        // start_time: 'Sat, 24 Sep 2022 04:11:15 GMT',
+        start_time: 1663992934076,
+        duration_mins: 30,
+        created_by_id: 0,
+        facilitated_by_id: 0,
+        invited_ids: [],
+        hidden: false,
+        access_ids: [],
+        description: '',
       },
     ]);
+
+    debugger;
   }
 
   return (

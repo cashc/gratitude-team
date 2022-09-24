@@ -10,9 +10,11 @@
     "lint": "eslint -c ./.eslintrc.json",
     "jest": "react-scripts test",
     "test": "yarn run typecheck && yarn run lint && yarn run jest",
-    "deploy": "yarn run lint && yarn run typecheck && yarn run build && gh-pages -d build"
+    "deploy": "yarn run lint && yarn run typecheck && yarn run build && gh-pages -d build",
+    "eject": "react-scripts eject"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^1.35.7",
     "react": "^18.2.0",
     "react-circular-input": "^0.2.4",
     "react-dom": "^18.2.0",
