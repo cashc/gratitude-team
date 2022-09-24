@@ -2,28 +2,20 @@ import React from 'react';
 import styled, { ThemeProvider } from './styled';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import theme from './theme';
-import { Home } from './Home';
-import { Why } from './Why';
-import { Link } from './shared-ui';
-
-export const ROUTES = {
-  home: '/',
-  create_account: '/create-account',
-  login: '/login',
-  why: '/why',
-};
+import { Link, RowOrColumn } from './ui';
+import TextSvg from './ui/svg/text.svg';
+import Hero from './ui/svg/mountains.svg';
+import { ROUTES } from './routes';
+import { PageNotFound } from './PageNotFound';
 
 const Main = styled.div`
-  display: flex;
   width: 100%;
   height: 100vh;
-  overflow: hidden;
-  flex-direction: column;
   margin: auto;
   background-color: ${(props) => props.theme.background};
 `;
 
-const Header = styled.div`
+const HeaderContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -36,27 +28,53 @@ const Header = styled.div`
   margin-bottom: 15px;
 `;
 
-const LogoEl = styled(Link)`
-  font-size: 2rem;
-  font-weight: 600;
-  color: ${({ theme }) => theme.text};
-  text-decoration: none;
+const LogoEl = styled.img`
+  width: 250px;
+  margin-bottom: -12px;
 `;
-const Logo = () => <LogoEl to={ROUTES.home}>Gratitude Team</LogoEl>;
+const Logo = () => (
+  <Link to={ROUTES.home.path}>
+    <LogoEl src={TextSvg} />
+  </Link>
+);
+
+const LinksContainer = styled(RowOrColumn)`
+  ${Link} {
+    margin: 0 5px;
+  }
+`;
+
+const Header = () => (
+  <HeaderContainer>
+    <Logo />
+    <LinksContainer>
+      <Link to={ROUTES.about.path}>About</Link>
+    </LinksContainer>
+  </HeaderContainer>
+);
+
+const FooterContainer = styled.div`
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  z-index: 0;
+`;
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <Main>
-          <Header>
-            <Logo />
-            <Link to={ROUTES.why}>About</Link>
-          </Header>
+          <Header />
           <Routes>
-            <Route path={ROUTES.home} element={<Home />} />
-            <Route path={ROUTES.why} element={<Why />} />
+            {Object.values(ROUTES).map(({ path, Component }) => (
+              <Route key={path} path={path} element={<Component />} />
+            ))}
+            <Route path="*" element={<PageNotFound />} />
           </Routes>
+          <FooterContainer>
+            <img src={Hero} />
+          </FooterContainer>
         </Main>
       </BrowserRouter>
     </ThemeProvider>

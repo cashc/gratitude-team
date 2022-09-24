@@ -16,10 +16,15 @@
       "jsx": true
     },
     "project": "../tsconfig.json",
-    "tsconfigRootDir": "src",
+    "tsconfigRootDir": "./src",
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx"]
+    }
+  ],
   "plugins": [
     "prettier",
     "@typescript-eslint",

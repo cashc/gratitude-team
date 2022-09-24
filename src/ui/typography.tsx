@@ -20,6 +20,12 @@ export const Link = styled(RouterLink)`
   cursor: pointer;
 `;
 
+export const LinkText = styled(Text)`
+  font-size: 16px;
+  color: ${(props) => props.theme.primary};
+  cursor: pointer;
+`;
+
 export const H1 = styled(Text)`
   font-size: 40px;
   line-height: 48px;

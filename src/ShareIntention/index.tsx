@@ -1,5 +1,5 @@
 import React from 'react';
-import { Label } from '../shared-ui';
+import { Label } from '../ui';
 import styled from '../styled';
 
 const Body = styled.div`
