@@ -25,4 +25,3 @@ export const Row = styled.div`
   justify-content: center;
   flex-wrap: wrap;
 `;
-

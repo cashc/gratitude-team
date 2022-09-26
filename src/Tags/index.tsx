@@ -8,8 +8,8 @@ interface Props {
 }
 
 const TagElement = styled(Text)`
+  background-color: ${(t) => t.theme.backgroundLight};
   border-color: ${(t) => t.theme.border};
-  background-image: linear-gradient(${(t) => t.theme.primaryGradient});
   box-shadow: ${(t) => t.theme.shadow};
   border-radius: 70px;
 

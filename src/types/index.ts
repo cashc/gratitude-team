@@ -20,7 +20,7 @@ export interface Event {
   description: string;
   id: number;
   tag_ids?: number[];
-  start_time: number;
+  start_time: number | string; // TODO number or string?
   duration_mins: number;
   created_by_id: number;
   facilitated_by_id: number;

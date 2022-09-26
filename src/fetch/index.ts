@@ -1,5 +1,5 @@
-const API_ENDPOINT: string = process.env.API_ENDPOINT || '';
-const JWT_SECRET: string = process.env.JWT_SECRET || '';
+const API_ENDPOINT: string = process.env.REACT_APP_API_ENDPOINT || '';
+const JWT_SECRET: string = process.env.REACT_APP_JWT_SECRET || '';
 
 interface API_FETCH_ASYNC {
   url: string;
