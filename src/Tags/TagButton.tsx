@@ -13,7 +13,7 @@ const TagElement = styled(Text)`
   box-shadow: ${(t) => t.theme.shadow};
   border-radius: 70px;
 
-  margin: 10px 15px;
+  margin: 8px 0 8px 10px;
   padding: 5px 15px;
 
   min-width: fit-content;

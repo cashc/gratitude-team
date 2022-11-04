@@ -1,4 +1,4 @@
-export const WEEKDAYS = [
+export const WEEKDAYS_DEFAULT_ORDER = [
   'Sunday',
   'Monday',
   'Tuesday',
@@ -6,6 +6,16 @@ export const WEEKDAYS = [
   'Thursday',
   'Friday',
   'Saturday',
+];
+
+export const WEEKDAYS = [
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+  'Sunday',
 ];
 
 export const MONTHS = [

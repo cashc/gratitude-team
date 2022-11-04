@@ -2,9 +2,16 @@ import React, { useState } from 'react';
 import { LinkText, Page, RowOrColumn, H1 } from '../ui';
 import styled from '../styled';
 import glacier_pano from './glacier-np-pano.jpeg';
+import HeroImg from '../ui/svg/mountains-hero.svg';
 
 const GlacierPano = styled.img.attrs({
   src: glacier_pano,
+})`
+  width: 100%;
+`;
+
+const Hero = styled.img.attrs({
+  src: HeroImg,
 })`
   width: 100%;
 `;
@@ -25,8 +32,8 @@ export const About: React.FC = () => {
       <p>
         GratitudeTeam.org is a website which coordinates meeting and connecting
         with others around shared interests and practices. Small groups meet
-        over Zoom to discuss books, practice mindfulness techniques, and connect
-        with each other on a deep level. Being vulnerable and sharing
+        over Zoom to discuss books, share mindfulness practices, and connect
+        with each other on a soul level. Being vulnerable and sharing
         authentically, groups bond and connect, lifting each other up and
         growing in gratitude for the beautiful lives we're each living.
       </p>
@@ -77,6 +84,8 @@ export const About: React.FC = () => {
         With gratitude, <br />
         Cash
       </p>
+
+      <Hero />
     </Page>
   );
 };

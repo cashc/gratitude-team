@@ -4,7 +4,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import theme from './theme';
 import { Link, RowOrColumn } from './ui';
 import TextSvg from './ui/svg/text.svg';
-import Hero from './ui/svg/mountains.svg';
 import { ROUTES } from './routes';
 import { PageNotFound } from './PageNotFound';
 
@@ -53,13 +52,6 @@ const Header = () => (
   </HeaderContainer>
 );
 
-const FooterContainer = styled.div`
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  z-index: 0;
-`;
-
 function App() {
   return (
     <ThemeProvider theme={theme}>
@@ -72,9 +64,6 @@ function App() {
             ))}
             <Route path="*" element={<PageNotFound />} />
           </Routes>
-          <FooterContainer>
-            <img src={Hero} />
-          </FooterContainer>
         </Main>
       </BrowserRouter>
     </ThemeProvider>

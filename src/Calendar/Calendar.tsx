@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '../styled';
-import { Event } from '../types';
+import { EventLD } from '../types';
 import { TextSmall } from '../ui';
 import { MONTHS, WEEKDAYS, ONE_DAY_MILLISECONDS } from './constants';
 
@@ -14,24 +14,29 @@ const CalendarContainer = styled.div`
 const WeekdaysContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-
-  :last-child {
-    border-bottom: none;
-  }
 `;
 
-const WeekdayEl = styled.div<{ isToday: boolean; small?: boolean }>`
+const WeekdayEl = styled.div<{ isToday: boolean; isPast: boolean }>`
   flex: 1;
   min-width: 82px;
   border-right: 1px solid ${(t) => t.theme.border};
 
-  height: ${(t) => (t.small ? '120px' : '280px')};
+  height: 280px;
   border-bottom: none;
 
-  ${(t) => (t.isToday ? `background: ${t.theme.lightGray};` : '')}
+  ${(t) => (t.isToday ? `background: ${t.theme.gray};` : '')}
+  ${(t) =>
+    t.isPast
+      ? `background: ${t.theme.backgroundDisabled}; color: ${t.theme.textlight}; border-color: ${t.theme.borderDisabled};`
+      : ''}
 
   :last-child {
     border-right: none;
+    border-radius: 14px 0 0 14px;
+  }
+
+  :first-child {
+    border-radius: 14px 0 0 14px;
   }
 `;
 
@@ -53,53 +58,78 @@ const EventContainer = styled(TextSmall)`
 const isSameDate = (d1: Date, d2: Date): boolean =>
   `${d1}`.slice(0, 15) === `${d2}`.slice(0, 15);
 
+const getDay = (defaultDay: number) => {
+  if (defaultDay === 0) {
+    return 6;
+  }
+  return defaultDay - 1;
+};
+
+export const getTimeString = (mins: number) => {
+  const hours = mins / 60;
+  const rhours = Math.floor(hours);
+  const minutes = (hours - rhours) * 60;
+  const rminutes = Math.round(minutes);
+  if (hours) {
+    return `${rhours} hours ${rminutes} mins`;
+  }
+  return `${rminutes} mins`;
+};
+
+export const getTimeUntilEvent = (ev?: EventLD): string => {
+  if (!ev) {
+    return '???';
+  }
+  const eventMs = +new Date(ev.start_time);
+  const nowMs = +new Date();
+  if (nowMs < eventMs) {
+    const minsUntilEvent = Math.floor((eventMs - nowMs) / 60000);
+    return `in ${getTimeString(minsUntilEvent)}`;
+  } else if (nowMs < eventMs + ev.duration_mins * 60000) {
+    return 'now';
+  }
+  return 'undefined';
+};
+
 interface Props {
   selectedDate: Date;
   now: Date;
-  events: Event[];
+  events: EventLD[];
+  selectedEvent?: EventLD;
+  setSelectedEvent: (e: EventLD) => void;
 }
 
-export const Calendar: React.FC<Props> = ({ selectedDate, now, events }) => {
-  const firstSundayEpoch =
-    +selectedDate - selectedDate.getDay() * ONE_DAY_MILLISECONDS;
-  const ThisWeek = WEEKDAYS.map((d, i) => {
-    const date = new Date(firstSundayEpoch + ONE_DAY_MILLISECONDS * i);
+export const Calendar: React.FC<Props> = ({
+  selectedDate,
+  now,
+  events,
+  selectedEvent,
+  setSelectedEvent,
+}) => {
+  const firstMondayEpoch =
+    +selectedDate - getDay(selectedDate.getDay()) * ONE_DAY_MILLISECONDS;
+
+  const Week = WEEKDAYS.map((d, i) => {
+    const date = new Date(firstMondayEpoch + ONE_DAY_MILLISECONDS * i);
     const curDate = date.getDate();
+    const isPast = date < now;
+
     const Events = events
-      .filter((e) => isSameDate(new Date(e.start_time), date))
-      .map((e) => {
-        const eventDate = new Date(e.start_time);
+      .filter((ev) => isSameDate(new Date(ev.start_time), date))
+      .map((ev) => {
+        const eventDate = new Date(ev.start_time);
         return (
-          <EventContainer>
-            {`${eventDate}`.slice(16, 21)} {e.name}
+          <EventContainer key={ev.id} onClick={() => setSelectedEvent(ev)}>
+            {`${eventDate}`.slice(16, 21)} {ev.name}
           </EventContainer>
         );
       });
+
     return (
-      <WeekdayEl isToday={isSameDate(now, date)}>
+      <WeekdayEl key={d} isToday={isSameDate(now, date)} isPast={isPast}>
         <WeekdayNameEl isFirst={i === 0}>{d}</WeekdayNameEl>
         <WeekdayContent isFirst={i === 0}>
-          {curDate === 1 ? MONTHS[date.getMonth()] : null}
-          {curDate}
-          {Events}
-        </WeekdayContent>
-      </WeekdayEl>
-    );
-  });
-
-  const secondSundayEpoch =
-    +selectedDate + (7 - selectedDate.getDay()) * ONE_DAY_MILLISECONDS;
-  const NextWeek = WEEKDAYS.map((d, i) => {
-    const date = new Date(secondSundayEpoch + ONE_DAY_MILLISECONDS * i);
-    const curDate = date.getDate();
-    const Events = events
-      .filter((e) => isSameDate(new Date(e.start_time), date))
-      .map((e) => <EventContainer>{e.name}</EventContainer>);
-    return (
-      <WeekdayEl isToday={isSameDate(now, date)} small={true}>
-        <WeekdayNameEl isFirst={i === 0}></WeekdayNameEl>
-        <WeekdayContent isFirst={i === 0}>
-          {curDate === 1 ? `${MONTHS[date.getMonth()]} ` : ''}
+          {curDate === 1 ? `${MONTHS[date.getMonth()]} ` : null}
           {curDate}
           {Events}
         </WeekdayContent>
@@ -109,8 +139,7 @@ export const Calendar: React.FC<Props> = ({ selectedDate, now, events }) => {
 
   return (
     <CalendarContainer>
-      <WeekdaysContainer>{ThisWeek}</WeekdaysContainer>
-      <WeekdaysContainer>{NextWeek}</WeekdaysContainer>
+      <WeekdaysContainer>{Week}</WeekdaysContainer>
     </CalendarContainer>
   );
 };
