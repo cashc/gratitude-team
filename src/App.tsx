@@ -56,15 +56,27 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
-        <Main>
-          <Header />
-          <Routes>
-            {Object.values(ROUTES).map(({ path, Component }) => (
-              <Route key={path} path={path} element={<Component />} />
-            ))}
-            <Route path="*" element={<PageNotFound />} />
-          </Routes>
-        </Main>
+        <Routes>
+          {Object.values(ROUTES).map(({ path, Component, header }) => {
+            return (
+              <Route
+                key={path}
+                path={path}
+                element={
+                  header ? (
+                    <Main>
+                      <Header />
+                      <Component />
+                    </Main>
+                  ) : (
+                    <Component />
+                  )
+                }
+              />
+            );
+          })}
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
       </BrowserRouter>
     </ThemeProvider>
   );

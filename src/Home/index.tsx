@@ -104,7 +104,7 @@ export const Home: React.FC = () => {
       <GatheringsHeader>
         <div>
           <H2 style={{ marginBottom: 0 }}>Gatherings</H2>
-          <TextSmall>{events.length} available</TextSmall>
+          <TextSmall>{events.length}? available</TextSmall>
         </div>
         <Button onClick={() => setFiltersVisible(!filtersVisible)}>
           <MdOutlineFilterAlt /> &nbsp;Filter&nbsp;
