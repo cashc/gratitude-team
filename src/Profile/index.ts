@@ -1,6 +1,6 @@
 export const intentions = [
   'Sharing in the struggle to be present, grateful, and full of love 🍌% of the time.',
-  'Sharing space with fellow humans struggling for gratitude',
+  'Sharing space with fellow humans of gratitude',
   'Love',
   'Contemplating nothingness with friends',
   'Remembering the mysteries of life',
